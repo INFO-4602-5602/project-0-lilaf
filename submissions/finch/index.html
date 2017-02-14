@@ -136,9 +136,7 @@
 
 			    // this scales the yaxis based on the min and max of the x-values of the data
 			    var yScale = d3.scale.linear()
-			                    .domain([d3.min(dataIII, function(d) {
-			                        return parseFloat(d[hBars]);
-			                    })-1, d3.max(dataIII, function(d) {
+			                    .domain([0, d3.max(dataIII, function(d) {
 			                        return parseFloat(d[hBars]);
 			                    })+1])
 			                    .range([h - yOffset - margin, margin]);
@@ -203,9 +201,7 @@
 
 					// this scales the yaxis based on the min and max of the x-values of the data
 					var yScale = d3.scale.linear()
-													.domain([d3.min(dataIII, function(d) {
-															return parseFloat(d[hBarsY]);
-													})-1, d3.max(dataIII, function(d) {
+													.domain([0, d3.max(dataIII, function(d) {
 															return parseFloat(d[hBarsY]);
 													})+1])
 													.range([h - yOffset - margin, margin]);
@@ -398,12 +394,13 @@
 						// when this function called text will be added to the svg located near the point clicked on using the x and y values of that point
 			 			function handleMouseDown(d, i) {
 			 				d3.select('#scatterLabel')
-							   .append('text')
+							   //.append('text')
 							// svg3.append('text') // add a text box to the svg
 							// 		  .attr('id', 't' + i)// create an id so we can remove it on the release of the mouse click
 							// 			.attr('x', xScale3(d['x'])-20) // try to center it over the dot
 							// 			.attr('y', yScale3(d['y'])-15) // try to place it just a bit above the dot
-			 						.html('You clicked --> x: ' + d['x'] + ', y: ' + d['y'] + '<br/>'); // pull the x and y values for this point
+							// first used append and had a list of points that were clicked, using line breaks between each - this is why I used html here rather then text
+			 						.html('You clicked the point (x: ' + d['x'] + ', y: ' + d['y'] + ')'); // pull the x and y values for this point
 			 			}
 
 						// when this function is called the text box associated with a the id specific to this data point will be removed from the svg
